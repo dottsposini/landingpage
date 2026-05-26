@@ -773,7 +773,7 @@ button{font-family:inherit}
 (function(){
   // Endpoint: locale (Flask) in sviluppo, Cloudflare Worker in produzione.
   // ↓↓↓ Quando deployi il Worker, sostituisci YOURSUBDOMAIN con il sottodominio Cloudflare ↓↓↓
-  var WORKER_URL = 'https://claudia-leads.YOURSUBDOMAIN.workers.dev';
+  var WORKER_URL = 'https://claudia-leads.dottsposini.workers.dev';
   var LOCAL_URL  = 'http://localhost:5050/save-contact';
   var isLocal = (location.hostname === 'localhost' || location.hostname === '127.0.0.1');
   var API_ENDPOINT = isLocal ? LOCAL_URL : WORKER_URL;
