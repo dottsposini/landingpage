@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Python virtualenv
+.venv/
+__pycache__/
+*.pyc
+
+# Dati / PII (NON committare)
+contatti.csv
+*.csv
+
+# Backup / lavoro
+index.old.html
+index-v1.html
+
+# Asset originali pesanti (sostituiti da claudia.jpg ottimizzato)
+Foto Doc.png
+
+# Asset ebook-cover.png pesante (2.4MB) — l'HTML usa solo ebook-cover-nobg.png
+ebook-cover.png
+
+# Log
+*.log
+
+# Claude Code locale
+.claude/

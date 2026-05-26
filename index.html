@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#060B12">
+<title>Quando la Testa Blocca il Corpo — Dott.ssa Claudia Sposini</title>
+<meta name="description" content="Guida clinica gratuita della Dott.ssa Claudia Sposini per uomini che affrontano l'ansia da prestazione e difficoltà nell'intimità.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-0:#060B12; --bg-1:#0A1018; --bg-2:#0E1620; --bg-3:#121D2B; --bg-4:#162536;
+  --c1:#5EC4D4; --c2:#3A9CC5; --c3:#7AD4E2; --c4:#2B7EA8;
+  --c-dim:rgba(94,196,212,0.07); --c-glow:rgba(94,196,212,0.22); --c-glow2:rgba(58,156,197,0.15);
+  --tx:#ECE8E2; --tx2:#9EAAB7; --tx3:#546474;
+  --br1:rgba(94,196,212,0.07); --br2:rgba(94,196,212,0.16);
+  --f:'Montserrat',system-ui,sans-serif;
+  --mx:1060px;
+  --ease:cubic-bezier(0.16,1,0.3,1); --easeS:cubic-bezier(0.4,0,0.2,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg-0);color:var(--tx);font-family:var(--f);font-weight:400;font-size:clamp(.92rem,1.5vw,1.02rem);line-height:1.72;overflow-x:hidden}
+h1,h2,h3{font-family:var(--f);line-height:1.1;letter-spacing:-.025em;color:var(--tx)}
+img{display:block;max-width:100%}
+button{font-family:inherit}
+.mx{max-width:var(--mx);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem);width:100%}
+
+/* AMBIENT */
+.amb{position:fixed;pointer-events:none;z-index:0;border-radius:50%}
+.amb-1{width:800px;height:800px;top:-300px;right:-300px;background:radial-gradient(circle,rgba(94,196,212,.035) 0%,transparent 60%)}
+.amb-2{width:600px;height:600px;bottom:15%;left:-280px;background:radial-gradient(circle,rgba(58,156,197,.03) 0%,transparent 60%)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv.fl{transform:translateX(-32px) translateY(0)}
+.rv.fl.vis{transform:translateX(0) translateY(0)}
+.rv.fsc{transform:scale(.92) translateY(0);opacity:0}
+.rv.fsc.vis{transform:scale(1) translateY(0);opacity:1}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.3s}.d6{transition-delay:.36s}
+
+/* HERO */
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;position:relative;padding:0;overflow:hidden;z-index:1;text-align:center}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(94,196,212,.05) 0%,transparent 100%),radial-gradient(ellipse 40% 40% at 50% 80%,rgba(58,156,197,.04) 0%,transparent 100%);pointer-events:none}
+.hero-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;width:100%;padding:clamp(2rem,4vw,3rem) clamp(1.25rem,4vw,2.5rem)}
+
+.hero-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(90vw,700px);height:min(90vw,700px);pointer-events:none;z-index:0}
+.hero-rings circle{fill:none;stroke:rgba(94,196,212,.045);stroke-width:.4;transform-origin:center}
+.hr1{animation:hrP 10s ease-in-out infinite}
+.hr2{animation:hrP 10s ease-in-out 2s infinite}
+.hr3{animation:hrP 10s ease-in-out 4s infinite}
+.hr4{animation:hrP 10s ease-in-out 6s infinite}
+@keyframes hrP{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.7;transform:scale(1.03)}}
+
+.hps{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.hp{position:absolute;background:var(--c1);border-radius:50%;opacity:0;animation:hpF linear infinite}
+@keyframes hpF{0%{opacity:0;transform:translateY(0) scale(.4)}12%{opacity:.28}88%{opacity:.28}100%{opacity:0;transform:translateY(-150px) scale(0)}}
+
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--c1);margin-bottom:clamp(1rem,2vw,1.5rem);opacity:0;animation:hUp .8s var(--ease) .1s forwards}
+.hero-tag-line{width:28px;height:1.5px;background:var(--c1);border-radius:2px}
+
+.hero h1{font-size:clamp(3rem,8vw,5.5rem);font-weight:800;margin-bottom:clamp(.8rem,1.5vw,1.2rem);opacity:0;animation:hUp 1s var(--ease) .2s forwards;text-transform:uppercase;letter-spacing:-.03em}
+.hero h1 .hlit{background:linear-gradient(135deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.hero-sub{font-size:clamp(.92rem,1.8vw,1.08rem);font-weight:400;color:var(--tx2);max-width:520px;margin:0 auto clamp(1.5rem,2.5vw,2rem);opacity:0;animation:hUp .9s var(--ease) .38s forwards}
+
+.hero-cta-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1rem;margin-bottom:clamp(2rem,4vw,3rem);opacity:0;animation:hUp .9s var(--ease) .5s forwards}
+.hero-trust{font-size:.72rem;color:var(--tx3);letter-spacing:.01em}
+.hero-trust b{color:var(--c3);font-weight:600}
+
+.hero-ebook{opacity:0;animation:hScale 1.1s var(--ease) .55s forwards;position:relative;z-index:2}
+.hero-ebook img{width:clamp(200px,30vw,300px);filter:drop-shadow(0 24px 60px rgba(0,0,0,.5)) drop-shadow(0 0 100px rgba(94,196,212,.1));transition:transform .6s var(--easeS)}
+.hero-ebook img:hover{transform:translateY(-8px) scale(1.02)}
+
+.hero-scroll{position:absolute;bottom:clamp(1rem,2vw,1.5rem);left:0;right:0;margin:0 auto;width:fit-content;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--tx3);font-size:.62rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;opacity:0;animation:hUpC .7s var(--ease) 1.3s forwards;cursor:pointer;z-index:2;background:none;border:none;font-family:var(--f)}
+.hero-scroll svg{animation:sBounce 2.5s ease-in-out infinite}
+@keyframes sBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@keyframes hUpC{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes hUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes hScale{from{opacity:0;transform:scale(.88) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+/* SECTIONS */
+.sec{padding:clamp(4.5rem,9vw,7.5rem) 0;position:relative;z-index:1}
+.sec-alt{background:var(--bg-1)}
+.sec-label{display:block;text-align:center;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--c1);margin-bottom:.75rem}
+.sec-title{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:700;text-align:center;margin-bottom:.5rem}
+.sec-sub{text-align:center;color:var(--tx2);max-width:520px;margin:0 auto 3rem;font-size:.9rem}
+.sec-line{width:40px;height:2px;background:linear-gradient(90deg,transparent,var(--c1),transparent);margin:0 auto 2.5rem;border-radius:2px}
+
+/* CTA */
+.cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 36px;font-family:var(--f);font-size:.88rem;font-weight:600;color:var(--bg-0);background:linear-gradient(135deg,var(--c1),var(--c2));border:none;border-radius:56px;cursor:pointer;overflow:hidden;transition:transform .3s var(--easeS),box-shadow .3s var(--easeS);text-transform:uppercase;letter-spacing:.06em}
+.cta:hover{transform:scale(1.04);box-shadow:0 8px 36px var(--c-glow),0 0 0 1px rgba(94,196,212,.1)}
+.cta:active{transform:scale(.97)}
+.cta::after{content:'';position:absolute;top:0;left:-110%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-20deg);animation:shim 6s ease-in-out infinite}
+@keyframes shim{0%,100%{left:-110%}16%{left:140%}17%{left:-110%}}
+.cta-ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;font-family:var(--f);font-size:.82rem;font-weight:500;color:var(--c1);background:transparent;border:1px solid var(--br2);border-radius:56px;cursor:pointer;transition:all .3s var(--easeS);letter-spacing:.04em;text-transform:uppercase}
+.cta-ghost:hover{background:var(--c-dim);border-color:var(--c1)}
+
+/* PAIN */
+.pain-list{display:flex;flex-direction:column;gap:0;max-width:580px;margin:0 auto}
+.pain-item{display:flex;align-items:center;gap:clamp(.85rem,2vw,1.15rem);padding:clamp(.9rem,1.8vw,1.1rem) 0;border-bottom:1px solid rgba(94,196,212,.04)}
+.pain-item:last-child{border-bottom:none}
+.pain-ic{flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--c1);background:var(--c-dim);border-radius:10px;border:1px solid var(--br1)}
+.pain-ic svg{width:20px;height:20px}
+.pain-tx{font-size:clamp(.88rem,1.6vw,.98rem);color:var(--tx);font-weight:400}
+.pain-close{text-align:center;margin-top:2.5rem;color:var(--tx2);font-style:italic;font-weight:300;font-size:clamp(.92rem,1.8vw,1.05rem);max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7}
+
+/* CHAPTERS */
+.ch-grid{display:grid;grid-template-columns:1fr;gap:.85rem}
+@media(min-width:600px){.ch-grid{grid-template-columns:1fr 1fr;gap:1rem}}
+.ch-card{background:rgba(255,255,255,.015);border:1px solid var(--br1);border-radius:14px;padding:clamp(1.25rem,2.5vw,1.5rem);transition:all .35s var(--easeS);position:relative;overflow:hidden;text-align:center}
+.ch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(94,196,212,.12),transparent);opacity:0;transition:opacity .35s}
+.ch-card:hover{background:rgba(255,255,255,.035);border-color:var(--br2);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.2)}
+.ch-card:hover::before{opacity:1}
+.ch-num{font-size:.6rem;font-weight:700;color:var(--c1);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;display:block;opacity:.5}
+.ch-card h3{font-size:.95rem;font-weight:700;margin-bottom:.3rem;letter-spacing:-.01em}
+.ch-card p{font-size:.82rem;color:var(--tx2);line-height:1.6}
+.sec-cta{text-align:center;margin-top:2.5rem}
+
+/* PROFESSIONAL */
+.pro-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center;text-align:center}
+@media(min-width:768px){.pro-grid{grid-template-columns:.8fr 1.2fr;gap:3.5rem;text-align:left}}
+.pro-photo-w{display:flex;justify-content:center}
+.pro-photo{width:240px;height:300px;background:linear-gradient(150deg,var(--bg-4),var(--bg-2));border-radius:16px;border:1px solid var(--br1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;color:var(--tx3);font-size:.75rem;position:relative;overflow:hidden}
+.pro-photo::before{content:'';position:absolute;inset:6px;border:1px solid var(--br1);border-radius:12px;pointer-events:none;z-index:2}
+.pro-photo img{width:100%;height:100%;object-fit:cover;object-position:center 15%;border-radius:16px}
+.pro-text h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;margin-bottom:1rem}
+.pro-text h2 .hlit{background:linear-gradient(135deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pro-text p{color:var(--tx2);margin-bottom:1rem;max-width:460px;font-size:.9rem}
+@media(max-width:767px){.pro-text p{margin-left:auto;margin-right:auto}.pro-albo{text-align:center}.pro-text .sec-label{text-align:center!important}}
+.pro-badges{display:flex;flex-wrap:wrap;gap:.5rem}
+@media(max-width:767px){.pro-badges{justify-content:center}}
+.pro-b{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;font-size:.68rem;font-weight:600;color:var(--c3);background:var(--c-dim);border:1px solid var(--br1);border-radius:50px;letter-spacing:.01em}
+.pro-b-dot{width:4px;height:4px;background:var(--c1);border-radius:50%}
+.pro-albo{margin-top:1.1rem;font-size:.68rem;color:var(--tx3);line-height:1.6}
+
+/* PROOF */
+.proof{background:var(--bg-1);border-top:1px solid var(--br1);border-bottom:1px solid var(--br1)}
+.proof-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;text-align:center;margin-bottom:2.5rem}
+.proof-n{font-size:clamp(2.2rem,5vw,3rem);font-weight:800;color:var(--c1);line-height:1;margin-bottom:.3rem;letter-spacing:-.02em}
+.proof-l{font-size:.68rem;color:var(--tx3);max-width:120px;margin:0 auto;line-height:1.5;font-weight:400}
+.proof-q{text-align:center;max-width:480px;margin:0 auto;font-style:italic;font-weight:300;font-size:clamp(.92rem,1.8vw,1.05rem);color:var(--tx2);line-height:1.7;position:relative;padding:0 1.5rem}
+.proof-q::before{content:'\201C';position:absolute;top:-.8rem;left:0;font-size:3.5rem;color:var(--c1);opacity:.18;line-height:1;font-style:normal;font-weight:700}
+.proof-a{text-align:center;margin-top:.7rem;font-size:.72rem;color:var(--tx3);font-style:normal;font-weight:500}
+
+/* FORM */
+.sec-form{background:var(--bg-2);position:relative;overflow:hidden}
+.sec-form::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 35% at 50% 0%,rgba(94,196,212,.04) 0%,transparent 100%);pointer-events:none}
+.form-w{max-width:440px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.form-box{background:rgba(255,255,255,.015);border:1px solid var(--br1);border-radius:20px;padding:clamp(1.5rem,3.5vw,2.25rem);animation:fGl 5s ease-in-out infinite}
+@keyframes fGl{0%,100%{border-color:rgba(94,196,212,.07);box-shadow:0 0 0 rgba(94,196,212,0)}50%{border-color:rgba(94,196,212,.2);box-shadow:0 0 60px rgba(94,196,212,.04)}}
+.form-box h2{font-size:clamp(1.3rem,2.8vw,1.6rem);font-weight:700;margin-bottom:.35rem}
+.form-box .fsub{font-size:.84rem;color:var(--tx2);margin-bottom:1.3rem;font-weight:400}
+.ff{position:relative;margin-bottom:.75rem;text-align:left}
+.ff input{width:100%;padding:12px 14px 12px 40px;font-family:var(--f);font-size:.86rem;font-weight:400;color:var(--tx);background:rgba(0,0,0,.25);border:1px solid var(--br1);border-radius:10px;outline:none;transition:border-color .3s,box-shadow .3s}
+.ff input::placeholder{color:var(--tx3)}
+.ff input:focus{border-color:var(--c1);box-shadow:0 0 0 3px var(--c-dim)}
+.ff input.err{border-color:#e26a6a;box-shadow:0 0 0 3px rgba(226,106,106,.12)}
+.ff-ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--tx3);pointer-events:none;display:flex;align-items:center;justify-content:center}
+.form-submit{width:100%;margin-top:.25rem}
+.form-trust{display:flex;flex-direction:column;align-items:center;gap:.35rem;margin-top:1.1rem}
+.form-trust span{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;color:var(--tx3);font-weight:400}
+
+/* CONSENT CHECKBOX */
+.fcheck{display:flex;align-items:flex-start;gap:10px;cursor:pointer;user-select:none;text-align:left;margin:.4rem 0 .9rem;padding:.15rem 0}
+.fcheck input[type=checkbox]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.fcheck-box{flex-shrink:0;width:18px;height:18px;border:1.5px solid var(--br2);border-radius:4px;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;color:transparent;margin-top:1px;transition:background .25s,border-color .25s,color .25s}
+.fcheck:hover .fcheck-box{border-color:var(--c1)}
+.fcheck input:checked+.fcheck-box{background:var(--c1);border-color:var(--c1);color:var(--bg-0)}
+.fcheck input:focus-visible+.fcheck-box{outline:2px solid var(--c1);outline-offset:2px}
+.fcheck-text{font-size:.72rem;color:var(--tx2);line-height:1.55}
+.fcheck-opt{color:var(--tx3);font-style:italic}
+
+.suc{padding:1.25rem 0;text-align:center}
+.suc-chk{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#4CB86A,#3DA85C);display:flex;align-items:center;justify-content:center;margin:0 auto .85rem;animation:sPop .5s var(--ease);color:white}
+@keyframes sPop{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.suc h3{font-size:1.25rem;font-weight:700;margin-bottom:.3rem}
+.suc p{color:var(--tx2);font-size:.88rem}
+
+/* FAQ */
+.faq-list{max-width:580px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(94,196,212,.04)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.05rem 0;font-family:var(--f);font-size:.9rem;font-weight:500;color:var(--tx);background:none;border:none;cursor:pointer;text-align:left;transition:color .2s}
+.faq-q:hover{color:var(--c3)}
+.faq-chv{flex-shrink:0;color:var(--c1);transition:transform .35s var(--easeS)}
+.faq-item.open .faq-chv{transform:rotate(180deg)}
+.faq-aw{max-height:0;overflow:hidden;transition:max-height .4s var(--easeS)}
+.faq-item.open .faq-aw{max-height:240px}
+.faq-a{padding:0 0 1.05rem;font-size:.84rem;color:var(--tx2);line-height:1.72;font-weight:400}
+
+/* STEPS */
+.steps-row{display:flex;flex-direction:column;gap:2rem;max-width:600px;margin:0 auto;position:relative}
+.steps-row::before{content:'';position:absolute;left:27px;top:48px;bottom:48px;width:1px;background:linear-gradient(180deg,var(--c1),rgba(94,196,212,.05));display:none}
+@media(min-width:640px){.steps-row::before{display:block}}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.75rem;position:relative}
+@media(min-width:640px){.step{flex-direction:row;text-align:left;gap:1.25rem;align-items:center}}
+.step-num{flex-shrink:0;width:54px;height:54px;border-radius:50%;background:var(--c-dim);border:1px solid var(--br2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:var(--c1);position:relative;z-index:1}
+.step-text h3{font-size:.95rem;font-weight:700;margin-bottom:.2rem}
+.step-text p{font-size:.84rem;color:var(--tx2);line-height:1.65}
+
+/* CYCLE */
+.cycle-wrap{max-width:540px;margin:0 auto;text-align:center}
+.cycle-visual{display:flex;flex-direction:column;gap:0;align-items:center;position:relative;padding:1.5rem 0}
+.cycle-node{display:flex;align-items:center;justify-content:center;width:100%;max-width:380px;padding:1rem 1.5rem;background:var(--c-dim);border:1px solid var(--br1);border-radius:12px;font-size:.88rem;font-weight:500;color:var(--tx);text-align:center;position:relative}
+.cycle-arrow{display:flex;align-items:center;justify-content:center;color:var(--c1);opacity:.4;padding:.3rem 0}
+.cycle-arrow svg{width:20px;height:20px}
+.cycle-note{margin-top:2rem;font-size:.88rem;color:var(--tx2);font-style:italic;font-weight:300;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.7}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:1fr;gap:1rem;max-width:700px;margin:0 auto}
+@media(min-width:640px){.testi-grid{grid-template-columns:1fr 1fr}}
+.testi-card{background:rgba(255,255,255,.015);border:1px solid var(--br1);border-radius:14px;padding:1.5rem;text-align:center;position:relative}
+.testi-stars{color:var(--c1);margin-bottom:.65rem;font-size:.8rem;letter-spacing:2px}
+.testi-card p{font-size:.84rem;color:var(--tx2);line-height:1.7;font-style:italic;font-weight:300;margin-bottom:.75rem}
+.testi-name{font-size:.72rem;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em}
+
+/* WHO */
+.who-grid{display:grid;grid-template-columns:1fr;gap:.75rem;max-width:560px;margin:0 auto}
+.who-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--c-dim);border:1px solid var(--br1);border-radius:12px;text-align:left}
+.who-check{flex-shrink:0;color:var(--c1);display:flex;align-items:center;justify-content:center}
+.who-item span:last-child{font-size:.88rem;color:var(--tx);font-weight:400}
+
+/* LEGAL MODAL */
+.legal-overlay{position:fixed;inset:0;z-index:999;background:rgba(6,11,18,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1.5rem;opacity:0;transition:opacity .25s}
+.legal-overlay.open{display:flex;opacity:1}
+.legal-modal{background:var(--bg-2);border:1px solid var(--br1);border-radius:16px;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;padding:clamp(1.5rem,3vw,2.5rem);position:relative}
+.legal-modal h2{font-size:1.2rem;font-weight:700;margin-bottom:1rem;text-align:center}
+.legal-modal h3{font-size:.88rem;font-weight:600;margin-top:1.25rem;margin-bottom:.4rem;color:var(--c3)}
+.legal-modal p{font-size:.78rem;color:var(--tx2);line-height:1.72;margin-bottom:.65rem}
+.legal-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;background:var(--c-dim);border:1px solid var(--br1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx2);font-size:1rem;font-family:var(--f);transition:background .2s}
+.legal-close:hover{background:var(--br2)}
+.legal-content{display:none}
+.legal-content.active{display:block}
+
+/* FOOTER */
+.foot{padding:clamp(3.5rem,7vw,5.5rem) 0 1.5rem;text-align:center;position:relative;z-index:1}
+.foot-cta{font-size:clamp(1.15rem,2.5vw,1.55rem);font-weight:600;color:var(--tx);margin-bottom:1.25rem;line-height:1.4}
+.foot-cta .hlit{background:linear-gradient(135deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.foot-meta{margin-top:2rem;padding-top:1.25rem;border-top:1px solid rgba(94,196,212,.04)}
+.foot-links{font-size:.7rem;color:var(--tx3);margin-bottom:.5rem}
+.foot-links button{color:var(--tx3);background:none;border:none;cursor:pointer;font-family:var(--f);font-size:.7rem;text-decoration:underline;text-underline-offset:2px;transition:color .2s}
+.foot-links button:hover{color:var(--c1)}
+.foot-copy{font-size:.68rem;color:var(--tx3);opacity:.5;margin-bottom:.25rem}
+.foot-legal{font-size:.6rem;color:var(--tx3);opacity:.35;max-width:520px;margin:0 auto;line-height:1.7}
+.foot-legal-extra{margin-top:.75rem;font-size:.58rem;color:var(--tx3);opacity:.28;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.65}
+
+/* A11Y */
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .hero-tag,.hero h1,.hero-sub,.hero-cta-row,.hero-ebook,.hero-scroll{opacity:1;animation:none}
+  .cta::after{animation:none;display:none}
+  .form-box{animation:none}
+  .suc-chk{animation:none}
+  .hp{animation:none;display:none}
+  .hr1,.hr2,.hr3,.hr4{animation:none}
+  .hero-scroll svg{animation:none}
+}
+.cta:focus-visible,.cta-ghost:focus-visible,.faq-q:focus-visible,.ff input:focus-visible{outline:2px solid var(--c1);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<div class="amb amb-1"></div>
+<div class="amb amb-2"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-rings" viewBox="0 0 700 700" aria-hidden="true">
+    <circle class="hr1" cx="350" cy="350" r="120"/>
+    <circle class="hr2" cx="350" cy="350" r="190"/>
+    <circle class="hr3" cx="350" cy="350" r="260"/>
+    <circle class="hr4" cx="350" cy="350" r="330"/>
+  </svg>
+  <div class="hps" aria-hidden="true" id="heroParticles"></div>
+
+  <div class="hero-inner">
+    <div class="hero-tag"><span class="hero-tag-line"></span>Guida clinica gratuita</div>
+    <h1>
+      Quando la <span class="hlit">Testa</span><br>
+      Blocca il <span class="hlit">Corpo</span>
+    </h1>
+    <p class="hero-sub">
+      Scopri cosa succede davvero tra ansia e intimità — e perché non è colpa tua. Una guida clinica della Dott.ssa Claudia Sposini per ritrovare chiarezza e controllo.
+    </p>
+    <div class="hero-cta-row">
+      <button class="cta" data-scroll-form>Scarica la guida gratuita</button>
+      <span class="hero-trust"><b>15+ anni</b>&nbsp;di esperienza&nbsp;&nbsp;·&nbsp;&nbsp;<b>Centinaia</b>&nbsp;di uomini aiutati</span>
+    </div>
+    <div class="hero-ebook">
+      <img src="ebook-cover-nobg.png" alt="Copertina ebook: Quando la Testa Blocca il Corpo">
+    </div>
+  </div>
+
+  <button class="hero-scroll" data-scroll-form aria-label="Scorri">
+    <span>Scopri di più</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+  </button>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="sec sec-alt">
+  <div class="mx">
+    <span class="sec-label rv">Riconosciti</span>
+    <h2 class="sec-title rv d1">Ti è mai capitato di…</h2>
+    <div class="sec-line rv d2"></div>
+    <div class="pain-list">
+      <div class="pain-item rv fl d1">
+        <div class="pain-ic"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="14" cy="10" r="5"/><path d="M7 24c0-4 3.5-7 7-7s7 3 7 7"/><path d="M19 8l3-3M19 5l3 3" opacity=".4"/></svg></div>
+        <div class="pain-tx">Avere il desiderio ma il corpo che non risponde</div>
+      </div>
+      <div class="pain-item rv fl d2">
+        <div class="pain-ic"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="14" cy="14" r="10"/><path d="M14 8v6l4 2"/></svg></div>
+        <div class="pain-tx">Pensare “durerò abbastanza?” mentre sei con lei</div>
+      </div>
+      <div class="pain-item rv fl d3">
+        <div class="pain-ic"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3L4 7v6c0 7 4.5 10.5 10 13 5.5-2.5 10-6 10-13V7L14 3z"/><path d="M10 14l2.5 2.5L18 11"/></svg></div>
+        <div class="pain-tx">Evitare l’intimità per paura di non farcela</div>
+      </div>
+      <div class="pain-item rv fl d4">
+        <div class="pain-ic"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="5" width="18" height="18" rx="3"/><circle cx="14" cy="14" r="4"/></svg></div>
+        <div class="pain-tx">Sentirti in trappola tra la voglia e l’ansia</div>
+      </div>
+      <div class="pain-item rv fl d5">
+        <div class="pain-ic"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><path d="M17 17l6 6"/></svg></div>
+        <div class="pain-tx">Cercare risposte online senza mai trovare quella giusta</div>
+      </div>
+    </div>
+    <p class="pain-close rv d6">
+      Se ti sei riconosciuto in almeno una di queste frasi, sappi che non è colpa tua. E non sei l’unico.
+    </p>
+  </div>
+</section>
+
+<!-- CHAPTERS -->
+<section class="sec">
+  <div class="mx">
+    <span class="sec-label rv">Dentro la guida</span>
+    <h2 class="sec-title rv d1">Cosa troverai</h2>
+    <p class="sec-sub rv d2">Sei capitoli scritti per darti chiarezza, strumenti concreti e la consapevolezza che un percorso è possibile.</p>
+    <div class="ch-grid">
+      <div class="ch-card rv fsc d1"><span class="ch-num">Capitolo 01</span><h3>Non sei l’unico</h3><p>Scoprirai quanto è comune questa esperienza — e perché nessuno ne parla.</p></div>
+      <div class="ch-card rv fsc d2"><span class="ch-num">Capitolo 02</span><h3>Cosa succede davvero</h3><p>Il legame tra ansia, corpo e risposta sessuale spiegato in modo chiaro.</p></div>
+      <div class="ch-card rv fsc d3"><span class="ch-num">Capitolo 03</span><h3>Situazioni reali</h3><p>Esempi concreti in cui potresti riconoscerti. Storie vere, senza filtri.</p></div>
+      <div class="ch-card rv fsc d4"><span class="ch-num">Capitolo 04</span><h3>Gli errori che peggiorano tutto</h3><p>Cosa stai facendo — senza saperlo — che alimenta il ciclo dell’ansia.</p></div>
+      <div class="ch-card rv fsc d5"><span class="ch-num">Capitolo 05</span><h3>Primi strumenti pratici</h3><p>Tecniche che puoi iniziare ad applicare da subito nella tua quotidianità.</p></div>
+      <div class="ch-card rv fsc d6"><span class="ch-num">Capitolo 06</span><h3>Il passo successivo</h3><p>Perché un percorso guidato fa la differenza — e cosa aspettarti.</p></div>
+    </div>
+    <div class="sec-cta rv"><button class="cta" data-scroll-form>Scarica ora — è gratuita</button></div>
+  </div>
+</section>
+
+<!-- CYCLE -->
+<section class="sec sec-alt">
+  <div class="mx">
+    <span class="sec-label rv">Capire il meccanismo</span>
+    <h2 class="sec-title rv d1">Il ciclo dell’ansia da prestazione</h2>
+    <p class="sec-sub rv d2">Ecco cosa succede nella tua mente e nel tuo corpo — un circolo vizioso che si autoalimenta, ma che puoi imparare a interrompere.</p>
+    <div class="cycle-wrap">
+      <div class="cycle-visual">
+        <div class="cycle-node rv fsc d1">Pensiero anticipatorio: “e se non riesco?”</div>
+        <div class="cycle-arrow rv d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+        <div class="cycle-node rv fsc d2">Attivazione dell’ansia: il corpo entra in allarme</div>
+        <div class="cycle-arrow rv d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+        <div class="cycle-node rv fsc d3">Risposta fisica: il corpo non risponde come vorresti</div>
+        <div class="cycle-arrow rv d3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+        <div class="cycle-node rv fsc d4">Conferma negativa: “lo sapevo, non ce la faccio”</div>
+        <div class="cycle-arrow rv d4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+        <div class="cycle-node rv fsc d5">Evitamento o tensione nei rapporti successivi</div>
+      </div>
+      <p class="cycle-note rv d6">Questo ciclo non è un difetto personale. È un meccanismo automatico che il cervello attiva per proteggerti — ma che finisce per intrappolarti. Nella guida scoprirai come funziona e come iniziare a spezzarlo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec">
+  <div class="mx">
+    <span class="sec-label rv">3 passi</span>
+    <h2 class="sec-title rv d1">Come funziona</h2>
+    <p class="sec-sub rv d2">Ricevere la guida è semplice e riservato. Nessuno saprà mai che l’hai scaricata.</p>
+    <div class="steps-row">
+      <div class="step rv d1">
+        <div class="step-num">1</div>
+        <div class="step-text"><h3>Inserisci i tuoi dati</h3><p>Solo nome e email. Nessuna registrazione, nessun account da creare. I tuoi dati restano riservati.</p></div>
+      </div>
+      <div class="step rv d2">
+        <div class="step-num">2</div>
+        <div class="step-text"><h3>Controlla la tua email</h3><p>Riceverai la guida in formato PDF direttamente nella tua casella di posta in pochi minuti.</p></div>
+      </div>
+      <div class="step rv d3">
+        <div class="step-num">3</div>
+        <div class="step-text"><h3>Leggi con calma</h3><p>Prenditi il tempo che ti serve. La guida è tua, da leggere quando e dove vuoi, nel massimo della privacy.</p></div>
+      </div>
+    </div>
+    <div class="sec-cta rv"><button class="cta" data-scroll-form>Inizia ora</button></div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="sec sec-alt">
+  <div class="mx">
+    <span class="sec-label rv">Fa per te?</span>
+    <h2 class="sec-title rv d1">Questa guida è per te se…</h2>
+    <div class="sec-line rv d2"></div>
+    <div class="who-grid">
+      <div class="who-item rv d1"><span class="who-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Senti che l’ansia condiziona la tua vita intima</span></div>
+      <div class="who-item rv d2"><span class="who-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Hai provato a risolvere da solo ma nulla è cambiato</span></div>
+      <div class="who-item rv d3"><span class="who-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Non sai se quello che provi è “normale” o no</span></div>
+      <div class="who-item rv d4"><span class="who-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Vorresti capire cosa succede davvero nel tuo corpo</span></div>
+      <div class="who-item rv d5"><span class="who-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Cerchi un primo passo concreto, senza impegno</span></div>
+      <div class="who-item rv d6"><span class="who-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Hai bisogno di sentirti compreso, non giudicato</span></div>
+    </div>
+    <div class="sec-cta rv"><button class="cta" data-scroll-form>Scarica la guida gratuita</button></div>
+  </div>
+</section>
+
+<!-- PROFESSIONAL -->
+<section class="sec sec-alt">
+  <div class="mx">
+    <div class="pro-grid">
+      <div class="pro-photo-w rv">
+        <div class="pro-photo">
+          <img src="claudia.jpg" alt="Dott.ssa Claudia Sposini, psicologa e consulente sessuale">
+        </div>
+      </div>
+      <div class="pro-text rv d2">
+        <span class="sec-label" style="text-align:left">Chi sono</span>
+        <h2>Dott.ssa Claudia Sposini<br><span class="hlit">Psicologa, Psicoterapeuta e Consulente sessuale</span></h2>
+        <p>Lavoro da oltre 15 anni con uomini che affrontano difficoltà nell’intimità: dall’eiaculazione precoce alla difficoltà nel mantenere l’erezione, fino alla disconnessione tra desiderio e corpo.</p>
+        <p>Con esperienza clinica pluriennale come psicoterapeuta e consulente sessuale, e un aggiornamento scientifico costante, creo percorsi strutturati e personalizzati per ritrovare fiducia, controllo e piacere nella sessualità.</p>
+        <div class="pro-badges">
+          <span class="pro-b"><span class="pro-b-dot"></span>15+ anni di esperienza</span>
+          <span class="pro-b"><span class="pro-b-dot"></span>Specializzata in benessere maschile</span>
+          <span class="pro-b"><span class="pro-b-dot"></span>Aggiornamento ECM costante</span>
+        </div>
+        <div class="pro-albo">Psicologa · Psicoterapeuta iscritta all’Albo Nazionale dal 08/03/2007<br>Sezione A — Ordine della Lombardia n. 29192</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="sec proof" id="proofSection">
+  <div class="mx">
+    <div class="proof-stats rv" id="proofStats">
+      <div><div class="proof-n" id="cnt-patients">0</div><div class="proof-l">Persone seguite con percorsi personalizzati</div></div>
+      <div><div class="proof-n" id="cnt-years">0</div><div class="proof-l">Anni di esperienza clinica e formazione</div></div>
+      <div><div class="proof-n"><span id="cnt-sat">0</span>%</div><div class="proof-l">Si è sentito compreso fin dalla prima seduta</div></div>
+    </div>
+    <blockquote class="proof-q rv d2">Per la prima volta ho capito che non era una difficoltà solo mia. Finalmente qualcuno che mi ha ascoltato senza giudicarmi.</blockquote>
+    <p class="proof-a rv d3">— Marco, 34 anni</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec">
+  <div class="mx">
+    <span class="sec-label rv">Esperienze reali</span>
+    <h2 class="sec-title rv d1">Cosa dicono le persone che ho seguito</h2>
+    <p class="sec-sub rv d2">Storie anonime di uomini che hanno avuto il coraggio di fare il primo passo.</p>
+    <div class="testi-grid">
+      <div class="testi-card rv fsc d1">
+        <div class="testi-stars">★★★★★</div>
+        <p>“Pensavo di essere l’unico. Leggere questa guida mi ha fatto capire che è molto più comune di quanto immaginassi. Mi ha dato il coraggio di chiedere aiuto.”</p>
+        <div class="testi-name">Andrea, 29 anni</div>
+      </div>
+      <div class="testi-card rv fsc d2">
+        <div class="testi-stars">★★★★★</div>
+        <p>“Chiaro, diretto, senza giri di parole. Per la prima volta qualcuno mi ha spiegato cosa succede davvero, senza farmi sentire sbagliato.”</p>
+        <div class="testi-name">Luca, 41 anni</div>
+      </div>
+      <div class="testi-card rv fsc d3">
+        <div class="testi-stars">★★★★★</div>
+        <p>“La parte sugli errori comuni mi ha aperto gli occhi. Stavo facendo tutto il contrario di quello che avrei dovuto fare. Ora ho iniziato un percorso.”</p>
+        <div class="testi-name">Davide, 36 anni</div>
+      </div>
+      <div class="testi-card rv fsc d4">
+        <div class="testi-stars">★★★★★</div>
+        <p>“Mia moglie ha notato il cambiamento ancora prima che le dicessi qualcosa. Questa guida è stata il punto di partenza per ritrovare la nostra intimità.”</p>
+        <div class="testi-name">Stefano, 44 anni</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="sec sec-form" id="formSection">
+  <div class="mx">
+    <div class="form-w">
+      <div class="form-box rv" id="formBox">
+        <h2>Scarica la guida gratuita</h2>
+        <p class="fsub">Inserisci il tuo nome e la tua email. Riceverai la guida direttamente nella tua casella di posta.</p>
+        <form id="leadForm" novalidate>
+          <div class="ff">
+            <span class="ff-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <input type="text" id="inpName" name="name" placeholder="Il tuo nome" autocomplete="name" required aria-label="Il tuo nome">
+          </div>
+          <div class="ff">
+            <span class="ff-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+            <input type="email" id="inpEmail" name="email" placeholder="La tua email migliore" autocomplete="email" required aria-label="La tua email" inputmode="email">
+          </div>
+          <label class="fcheck">
+            <input type="checkbox" id="inpConsent" name="marketingConsent">
+            <span class="fcheck-box" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span class="fcheck-text">Voglio ricevere anche consigli e comunicazioni di marketing via email. Posso disiscrivermi in qualsiasi momento. <span class="fcheck-opt">(facoltativo)</span></span>
+          </label>
+          <button type="submit" class="cta form-submit" id="submitBtn">Inviami la guida</button>
+        </form>
+        <div class="form-trust">
+          <span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><circle cx="12" cy="16" r="1"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> I tuoi dati sono al sicuro. Nessuno spam, mai.</span>
+          <span>Potrai cancellarti in qualsiasi momento.</span>
+        </div>
+      </div>
+      <div class="form-box" id="formSuccess" style="display:none">
+        <div class="suc">
+          <div class="suc-chk"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>Perfetto!</h3>
+          <p>Controlla la tua email — la guida sta arrivando.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-alt">
+  <div class="mx">
+    <span class="sec-label rv">Domande frequenti</span>
+    <h2 class="sec-title rv d1">Hai qualche dubbio?</h2>
+    <div class="sec-line rv d2"></div>
+    <div class="faq-list">
+      <div class="faq-item rv d1">
+        <button class="faq-q" aria-expanded="false">
+          <span>La guida è davvero gratuita?</span>
+          <svg class="faq-chv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-aw"><div class="faq-a">Sì, completamente. Nessun costo nascosto, nessun obbligo. È un primo passo che ho voluto rendere accessibile a tutti.</div></div>
+      </div>
+      <div class="faq-item rv d2">
+        <button class="faq-q" aria-expanded="false">
+          <span>Chi vedrà i miei dati?</span>
+          <svg class="faq-chv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-aw"><div class="faq-a">Solo io. I tuoi dati sono protetti e non vengono condivisi con nessuno. La tua privacy è una priorità assoluta.</div></div>
+      </div>
+      <div class="faq-item rv d3">
+        <button class="faq-q" aria-expanded="false">
+          <span>Questa guida risolverà la mia situazione?</span>
+          <svg class="faq-chv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-aw"><div class="faq-a">La guida ti darà chiarezza e strumenti iniziali. Per un cambiamento profondo e duraturo, un percorso personalizzato è il passo successivo.</div></div>
+      </div>
+      <div class="faq-item rv d4">
+        <button class="faq-q" aria-expanded="false">
+          <span>Devo per forza iniziare un percorso dopo?</span>
+          <svg class="faq-chv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-aw"><div class="faq-a">Assolutamente no. La guida è tua, senza impegni. Se poi sentirai il bisogno di approfondire, sarò qui.</div></div>
+      </div>
+      <div class="faq-item rv d5">
+        <button class="faq-q" aria-expanded="false">
+          <span>Come faccio a parlarne con la mia partner?</span>
+          <svg class="faq-chv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-aw"><div class="faq-a">Nella guida troverai spunti anche su questo. Parlarne è spesso il primo vero atto di coraggio — e di intimità.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="mx">
+    <p class="foot-cta rv">Il primo passo è il più difficile.<br>Ma anche il più <span class="hlit">importante</span>.</p>
+    <button class="cta-ghost rv d1" data-scroll-form>Scarica la guida gratuita</button>
+    <div class="foot-meta">
+      <div class="foot-links">
+        <button data-legal="privacy">Privacy Policy</button> ·
+        <button data-legal="cookie">Cookie Policy</button> ·
+        <button data-legal="terms">Termini e Condizioni</button>
+      </div>
+      <p class="foot-copy">© 2025 Dott.ssa Claudia Sposini — Psicologa, Psicoterapeuta e Consulente sessuale</p>
+      <p class="foot-legal">
+        Psicologa iscritta all’Albo Nazionale dal 08/03/2007 — Sezione A, Ordine della Lombardia n. 29192. Questo materiale ha scopo esclusivamente informativo e divulgativo. Non costituisce attività di diagnosi, terapia o consulenza psicologica. Non sostituisce in alcun modo un percorso terapeutico personalizzato con un professionista abilitato.
+      </p>
+      <p class="foot-legal-extra">
+        Ai sensi del Regolamento UE 2016/679 (GDPR) e del D.Lgs. 196/2003, i dati personali raccolti tramite questo modulo sono trattati dalla Dott.ssa Claudia Sposini in qualità di Titolare del trattamento, esclusivamente per l’invio della guida gratuita e di eventuali comunicazioni correlate. I dati non saranno ceduti a terzi. L’interessato può esercitare i propri diritti (accesso, rettifica, cancellazione, opposizione) scrivendo all’indirizzo email della Titolare. La base giuridica del trattamento è il consenso espresso dall’interessato (Art. 6, par. 1, lett. a GDPR).
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- LEGAL MODAL -->
+<div class="legal-overlay" id="legalOverlay">
+  <div class="legal-modal">
+    <button class="legal-close" data-close-legal aria-label="Chiudi">×</button>
+
+    <div class="legal-content" id="legal-privacy">
+      <h2>Informativa sulla Privacy</h2>
+      <p>Ai sensi dell’Art. 13 del Regolamento UE 2016/679 (GDPR) e del D.Lgs. 196/2003 (Codice Privacy), la informiamo di quanto segue.</p>
+      <h3>Titolare del Trattamento</h3>
+      <p>Dott.ssa Claudia Sposini — Psicologa, Psicoterapeuta e Consulente sessuale. Iscritta all’Albo degli Psicologi della Lombardia, Sezione A, n. 29192.</p>
+      <h3>Dati raccolti</h3>
+      <p>Attraverso il modulo presente in questa pagina, raccogliamo: nome e indirizzo email. Questi dati vengono forniti volontariamente dall’utente. Il consenso al marketing è facoltativo e raccolto separatamente.</p>
+      <h3>Finalità del trattamento</h3>
+      <p>I dati vengono trattati esclusivamente per: invio della guida gratuita richiesta; invio di comunicazioni informative e aggiornamenti correlati al tema della guida (solo se l’utente ha espresso il consenso marketing). Non verranno utilizzati per finalità di profilazione né ceduti a terzi.</p>
+      <h3>Base giuridica</h3>
+      <p>Il trattamento per la consegna della guida si basa sull’esecuzione di un servizio richiesto dall’interessato (Art. 6, par. 1, lett. b GDPR). Il trattamento per finalità di marketing si basa sul consenso espresso e separato dell’interessato (Art. 6, par. 1, lett. a GDPR).</p>
+      <h3>Conservazione dei dati</h3>
+      <p>I dati saranno conservati per il tempo necessario alle finalità indicate e comunque non oltre 24 mesi dall’ultimo contatto, salvo diversa richiesta dell’interessato.</p>
+      <h3>Diritti dell’interessato</h3>
+      <p>In qualsiasi momento, l’interessato può esercitare i seguenti diritti: accesso ai propri dati personali; rettifica dei dati inesatti; cancellazione dei dati; limitazione del trattamento; portabilità dei dati; opposizione al trattamento; revoca del consenso. Per esercitare tali diritti, è sufficiente contattare la Titolare all’indirizzo email indicato nelle comunicazioni ricevute.</p>
+      <h3>Sicurezza</h3>
+      <p>I dati sono trattati con strumenti elettronici e conservati con misure di sicurezza adeguate a garantirne la riservatezza, ai sensi dell’Art. 32 del GDPR.</p>
+    </div>
+
+    <div class="legal-content" id="legal-cookie">
+      <h2>Cookie Policy</h2>
+      <p>Questa pagina utilizza esclusivamente cookie tecnici strettamente necessari al funzionamento del sito. Non vengono utilizzati cookie di profilazione, cookie di terze parti per finalità pubblicitarie, né strumenti di tracciamento comportamentale.</p>
+      <h3>Cookie tecnici</h3>
+      <p>Sono cookie indispensabili per il corretto funzionamento della pagina. Non richiedono il consenso dell’utente ai sensi dell’Art. 122 del D.Lgs. 196/2003 e del Provvedimento del Garante Privacy dell’8 maggio 2014.</p>
+      <h3>Cookie analitici (se presenti)</h3>
+      <p>Qualora vengano attivati strumenti di analisi del traffico (es. Google Analytics), questi saranno configurati in modalità anonimizzata, senza raccolta di dati personali identificativi, in conformità con le linee guida del Garante Privacy.</p>
+      <h3>Gestione dei cookie</h3>
+      <p>L’utente può gestire le preferenze relative ai cookie direttamente attraverso le impostazioni del proprio browser. La disattivazione dei cookie tecnici potrebbe compromettere la navigazione.</p>
+    </div>
+
+    <div class="legal-content" id="legal-terms">
+      <h2>Termini e Condizioni</h2>
+      <h3>Natura del servizio</h3>
+      <p>La guida gratuita offerta tramite questa pagina ha carattere esclusivamente informativo e divulgativo. Non costituisce in alcun modo prestazione di attività psicologica, psicoterapeutica o sanitaria ai sensi della Legge 56/1989 e del Codice Deontologico degli Psicologi Italiani.</p>
+      <h3>Limiti di responsabilità</h3>
+      <p>I contenuti della guida non sostituiscono il rapporto diretto tra professionista e paziente. Le informazioni fornite non devono essere intese come diagnosi, trattamento o suggerimento terapeutico. L’autrice declina ogni responsabilità per un uso improprio delle informazioni contenute nella guida.</p>
+      <h3>Proprietà intellettuale</h3>
+      <p>Tutti i contenuti di questa pagina e della guida (testi, grafica, layout) sono di proprietà della Dott.ssa Claudia Sposini e sono protetti dalla normativa vigente in materia di diritto d’autore (Legge 633/1941). È vietata la riproduzione, anche parziale, senza autorizzazione scritta.</p>
+      <h3>Comunicazioni</h3>
+      <p>Inserendo i propri dati nel modulo, l’utente acconsente a ricevere la guida gratuita richiesta. Il consenso a ricevere comunicazioni di marketing è facoltativo, separato e revocabile in qualsiasi momento tramite il link presente in ogni comunicazione o scrivendo alla Titolare.</p>
+      <h3>Foro competente</h3>
+      <p>Per ogni eventuale controversia relativa all’utilizzo di questa pagina e dei servizi ad essa connessi, il foro competente è quello di Milano, salvo diversa disposizione inderogabile di legge.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* HERO PARTICLES */
+(function(){
+  var box = document.getElementById('heroParticles');
+  if (!box || window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  for (var i = 0; i < 16; i++) {
+    var p = document.createElement('span');
+    p.className = 'hp';
+    p.style.left = (5 + Math.random() * 90) + '%';
+    p.style.top = (20 + Math.random() * 70) + '%';
+    p.style.animationDuration = (2.5 + Math.random() * 4) + 's';
+    p.style.animationDelay = (Math.random() * 6) + 's';
+    var size = 1.5 + Math.random() * 2.5;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    box.appendChild(p);
+  }
+})();
+
+/* REVEAL ON SCROLL */
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    document.querySelectorAll('.rv').forEach(function(e){ e.classList.add('vis'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+
+/* STATS COUNTER */
+(function(){
+  var target = document.getElementById('proofStats');
+  if (!target) return;
+  var triggered = false;
+  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var targets = { patients: 500, years: 15, satisfaction: 98 };
+  function setAll(v){
+    document.getElementById('cnt-patients').textContent = Math.round(v.patients) + '+';
+    document.getElementById('cnt-years').textContent = Math.round(v.years) + '+';
+    document.getElementById('cnt-sat').textContent = Math.round(v.satisfaction);
+  }
+  function animate(){
+    if (reduce) { setAll(targets); return; }
+    var dur = 2200, t0 = performance.now();
+    var ease = function(t){ return 1 - Math.pow(1 - t, 4); };
+    function tick(now){
+      var p = Math.min((now - t0) / dur, 1), e = ease(p);
+      setAll({ patients: e * targets.patients, years: e * targets.years, satisfaction: e * targets.satisfaction });
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && !triggered) { triggered = true; io.unobserve(e.target); animate(); }
+    });
+  }, { threshold: 0.2 });
+  io.observe(target);
+})();
+
+/* FAQ ACCORDION */
+(function(){
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i){
+        i.classList.remove('open');
+        var b = i.querySelector('.faq-q');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      if (!open) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+
+/* SCROLL TO FORM */
+(function(){
+  var formSec = document.getElementById('formSection');
+  if (!formSec) return;
+  document.querySelectorAll('[data-scroll-form]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      formSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(function(){ var f = document.getElementById('inpName'); if (f) f.focus(); }, 600);
+    });
+  });
+})();
+
+/* LEGAL MODAL */
+(function(){
+  var overlay = document.getElementById('legalOverlay');
+  if (!overlay) return;
+  function open(which){
+    document.querySelectorAll('.legal-content').forEach(function(c){ c.classList.remove('active'); });
+    var t = document.getElementById('legal-' + which);
+    if (t) t.classList.add('active');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('[data-legal]').forEach(function(b){
+    b.addEventListener('click', function(){ open(b.dataset.legal); });
+  });
+  document.querySelectorAll('[data-close-legal]').forEach(function(b){
+    b.addEventListener('click', close);
+  });
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
+})();
+
+/* FORM SUBMIT */
+(function(){
+  // Endpoint: locale (Flask) in sviluppo, Cloudflare Worker in produzione.
+  // ↓↓↓ Quando deployi il Worker, sostituisci YOURSUBDOMAIN con il sottodominio Cloudflare ↓↓↓
+  var WORKER_URL = 'https://claudia-leads.YOURSUBDOMAIN.workers.dev';
+  var LOCAL_URL  = 'http://localhost:5050/save-contact';
+  var isLocal = (location.hostname === 'localhost' || location.hostname === '127.0.0.1');
+  var API_ENDPOINT = isLocal ? LOCAL_URL : WORKER_URL;
+
+  var form = document.getElementById('leadForm');
+  var box = document.getElementById('formBox');
+  var success = document.getElementById('formSuccess');
+  var inpName = document.getElementById('inpName');
+  var inpEmail = document.getElementById('inpEmail');
+  var inpConsent = document.getElementById('inpConsent');
+  var btn = document.getElementById('submitBtn');
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!form) return;
+  function setErr(el, on){ el.classList.toggle('err', !!on); }
+  inpName.addEventListener('input', function(){ if (inpName.classList.contains('err') && inpName.value.trim()) setErr(inpName, false); });
+  inpEmail.addEventListener('input', function(){ if (inpEmail.classList.contains('err') && emailRe.test(inpEmail.value.trim())) setErr(inpEmail, false); });
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var name = inpName.value.trim();
+    var email = inpEmail.value.trim().toLowerCase();
+    var nameOk = name.length >= 2;
+    var emailOk = emailRe.test(email);
+    setErr(inpName, !nameOk);
+    setErr(inpEmail, !emailOk);
+    if (!nameOk) { inpName.focus(); return; }
+    if (!emailOk) { inpEmail.focus(); return; }
+    btn.disabled = true;
+    var oldText = btn.textContent;
+    btn.textContent = 'Invio in corso…';
+    var payload = {
+      name: name,
+      email: email,
+      marketingConsent: !!(inpConsent && inpConsent.checked),
+      timestamp: new Date().toISOString()
+    };
+    var saved = false;
+    try {
+      var res = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(8000)
+      });
+      if (res.ok) saved = true;
+    } catch (_) {}
+    if (!saved) {
+      try {
+        var list = JSON.parse(localStorage.getItem('contatti_fallback') || '[]');
+        list.push(payload);
+        localStorage.setItem('contatti_fallback', JSON.stringify(list));
+      } catch (err) {}
+    }
+    box.style.display = 'none';
+    success.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = oldText;
+  });
+})();
+</script>
+</body>
+</html>
