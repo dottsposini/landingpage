@@ -288,7 +288,7 @@ button{font-family:inherit}
     </p>
     <div class="hero-cta-row">
       <button class="cta" data-scroll-form>Scarica la guida gratuita</button>
-      <span class="hero-trust"><b>15+ anni</b>&nbsp;di esperienza&nbsp;&nbsp;·&nbsp;&nbsp;<b>Centinaia</b>&nbsp;di uomini aiutati</span>
+      <span class="hero-trust"><b>Molti anni</b>&nbsp;di esperienza&nbsp;&nbsp;·&nbsp;&nbsp;<b>Centinaia</b>&nbsp;di uomini aiutati</span>
     </div>
     <div class="hero-ebook">
       <img src="ebook-cover-nobg.png" alt="Copertina ebook: Quando la Testa Blocca il Corpo">
@@ -430,10 +430,10 @@ button{font-family:inherit}
       <div class="pro-text rv d2">
         <span class="sec-label" style="text-align:left">Chi sono</span>
         <h2>Dott.ssa Claudia Sposini<br><span class="hlit">Psicologa, Psicoterapeuta e Consulente sessuale</span></h2>
-        <p>Lavoro da oltre 15 anni con uomini che affrontano difficoltà nell’intimità: dall’eiaculazione precoce alla difficoltà nel mantenere l’erezione, fino alla disconnessione tra desiderio e corpo.</p>
+        <p>Lavoro da molti anni con uomini che affrontano difficoltà nell’intimità: dall’eiaculazione precoce alla difficoltà nel mantenere l’erezione, fino alla disconnessione tra desiderio e corpo.</p>
         <p>Con esperienza clinica pluriennale come psicoterapeuta e consulente sessuale, e un aggiornamento scientifico costante, creo percorsi strutturati e personalizzati per ritrovare fiducia, controllo e piacere nella sessualità.</p>
         <div class="pro-badges">
-          <span class="pro-b"><span class="pro-b-dot"></span>15+ anni di esperienza</span>
+          <span class="pro-b"><span class="pro-b-dot"></span>Molti anni di esperienza</span>
           <span class="pro-b"><span class="pro-b-dot"></span>Con esperienza nel benessere maschile</span>
           <span class="pro-b"><span class="pro-b-dot"></span>Aggiornamento ECM costante</span>
         </div>
@@ -448,7 +448,7 @@ button{font-family:inherit}
   <div class="mx">
     <div class="proof-stats rv" id="proofStats">
       <div><div class="proof-n" id="cnt-patients">0</div><div class="proof-l">Persone seguite con percorsi personalizzati</div></div>
-      <div><div class="proof-n" id="cnt-years">0</div><div class="proof-l">Anni di esperienza clinica e formazione</div></div>
+      <div><div class="proof-n">Molti</div><div class="proof-l">Anni di esperienza clinica e formazione</div></div>
       <div><div class="proof-n"><span id="cnt-sat">0</span>%</div><div class="proof-l">Si è sentito compreso fin dalla prima seduta</div></div>
     </div>
     <blockquote class="proof-q rv d2">Per la prima volta ho capito che non era una difficoltà solo mia. Una lettura che mi ha fatto sentire compreso, senza giudizio.</blockquote>
@@ -688,10 +688,9 @@ button{font-family:inherit}
   if (!target) return;
   var triggered = false;
   var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var targets = { patients: 500, years: 15, satisfaction: 98 };
+  var targets = { patients: 500, satisfaction: 98 };
   function setAll(v){
     document.getElementById('cnt-patients').textContent = Math.round(v.patients) + '+';
-    document.getElementById('cnt-years').textContent = Math.round(v.years) + '+';
     document.getElementById('cnt-sat').textContent = Math.round(v.satisfaction);
   }
   function animate(){
@@ -700,7 +699,7 @@ button{font-family:inherit}
     var ease = function(t){ return 1 - Math.pow(1 - t, 4); };
     function tick(now){
       var p = Math.min((now - t0) / dur, 1), e = ease(p);
-      setAll({ patients: e * targets.patients, years: e * targets.years, satisfaction: e * targets.satisfaction });
+      setAll({ patients: e * targets.patients, satisfaction: e * targets.satisfaction });
       if (p < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
